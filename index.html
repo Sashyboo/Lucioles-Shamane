@@ -319,7 +319,7 @@
         let mode = 'attract';
         let particleCount = 150;
         let speedMultiplier = 1.0;
-        // NOUVEAU : Variable globale pour le rayon
+        //  Variable globale pour le rayon
         let interactionRadius = 400; 
         
         let particles = [];
@@ -353,7 +353,7 @@
             `;
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -410,7 +410,7 @@
             document.getElementById('speed-display').innerText = val + 'x';
         }
 
-        // NOUVEAU : Fonction de mise à jour du rayon
+        // Fonction de mise à jour du rayon
         function updateRadius(val) {
             interactionRadius = parseInt(val);
             document.getElementById('radius-display').innerText = val + 'px';
@@ -493,14 +493,7 @@
                 this.vx *= 0.98;
                 this.vy *= 0.98;
                 
-                // --- CORRECTIF MAJEUR ICI ---
-                // ANCIEN CODE (Supprimé) : Il forçait la particule à revenir à sa direction d'origine
-                // if (absVx < absBaseVx) this.vx += this.baseVx * 0.02;
-                
-                // NOUVEAU CODE : "Errance naturelle"
-                // On ajoute une toute petite force aléatoire à chaque image.
-                // Cela empêche la particule de s'arrêter, sans la forcer dans une direction précise.
-                // C'est beaucoup plus naturel pour des lucioles.
+                // -
                 this.vx += (Math.random() - 0.5) * 0.1 * speedMultiplier;
                 this.vy += (Math.random() - 0.5) * 0.1 * speedMultiplier;
 
